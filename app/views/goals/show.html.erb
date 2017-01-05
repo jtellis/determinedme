@@ -1,4 +1,23 @@
-<%= @goal %>
-<% @goal.notes do |note| %>
-<%= note.body %>
-<% end %>
+<div class="goal">
+  <div class="title">
+    <%= @goal.title %>
+  </div>
+  <div class="description">
+    <%= @goal.description %>
+  </div>
+  <div class="notes">
+    <% @goal.notes.each do |note| %>
+      <div class="note">
+        <%= note.body %>
+        Add: <%= note.created_at %>
+        <%= form_for note, url: goal_note_path(@goal, note), method: 'delete' do |f| %>
+          <%= f.submit "Delete" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <%= form_for Note.new, url: goal_notes_path(@goal), method: 'post' do |f| %>
+    <%= f.text_area :body, size: "60x12" %>
+    <%= f.submit "Create" %>
+  <% end %>
+</div>
