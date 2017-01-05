@@ -2,7 +2,11 @@ class GoalsController < ApplicationController
   before_action :set_goal, only: [:show]
 
   def index
-    @goals = Goal.roots
+    @goals = current_user.goals.roots
+  end
+
+  def new
+    @goal = Goal.new
   end
 
   private
