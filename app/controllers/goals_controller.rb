@@ -1,9 +1,9 @@
 class GoalsController < ApplicationController
   before_action :set_goal, only: [:show]
 
-  def index() end
-
-  def show() end
+  def index
+    @goals = Goal.roots
+  end
 
   private
 
