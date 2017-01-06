@@ -1,5 +1,5 @@
 class Goal < ApplicationRecord
-  has_ancestry
+  acts_as_tree
   belongs_to :user
   has_many :notes
 end

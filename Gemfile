@@ -56,4 +56,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
 
-gem 'ancestry'
+gem 'acts_as_tree'
