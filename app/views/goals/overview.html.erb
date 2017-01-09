@@ -1,5 +1,9 @@
-<%= link_to 'Home', root_path %><br />
-
+<h1>Overview</h1>
+<div class="overview">
+<%= link_to @goal.title, goal_path(@goal) %><br />
 <% @goal.walk_tree do |goal, level| %>
-  <%= link_to "#{'-'*level} #{goal.title}", goal_path(goal) %><br />
+  <% level += 1 %>
+  <%= "|#{' '*level}" %>
+  <%= "#{'-'*level}\s" %><%= link_to "#{goal.title}", goal_path(goal) %><br />
 <% end %>
+</div>

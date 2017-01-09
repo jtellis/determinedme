@@ -1,0 +1,58 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ */
+@import 'bourbon';
+@import 'base/base';
+@import 'neat';
+@import 'refills/cards';
+@import 'refills/type-system-rounded';
+@import 'refills/tables';
+
+@import url('//fonts.googleapis.com/css?family=Nunito:400,700,300');
+@import url('//fonts.googleapis.com/css?family=Varela+Round');
+
+.card {
+  padding: 10px;
+}
+
+.wrapper {
+  @include outer-container;
+}
+
+.navigation {
+  border-bottom: 1px solid #FF5722;
+  text-align: center;
+  font-size: modular-scale(1);
+  font-weight: bold;
+}
+
+.main-navigation {
+  background: #607D8B;
+  @include span-columns(12);
+}
+
+.goals-navigation {
+  background: #B0BEC5;
+}
+
+.main {
+  @include span-columns(8);
+  @include shift(2);
+  @include media(max-width 769px) {
+    @include span-columns(12);
+    @include shift(0);
+  };
+}
+
+.overview {
+  font-size: modular-scale(1);
+}

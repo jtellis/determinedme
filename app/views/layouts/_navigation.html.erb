@@ -1,0 +1,7 @@
+<div class="navigation main-navigation">
+<%= link_to 'DeterminedMe', root_path %>
+<% if user_signed_in? %>
+|
+<%= link_to 'Logout', destroy_user_session_path, class: 'logo', :method => :delete %>
+<% end %>
+</div>

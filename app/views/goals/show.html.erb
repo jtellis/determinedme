@@ -1,38 +1,74 @@
-<% unless @goal.root? %>
-  <%= link_to "< #{@goal.parent.title}", goal_path(@goal.parent) %>
-<% end %>
-<%= link_to 'Overview', goal_overview_path(@goal.root) %>
+<%= render partial: 'navigation' %>
 
-<div class="goal">
-  <div class="title">
-    <%= @goal.title %>
-  </div>
-  <div class="description">
-    <%= @goal.description %>
-  </div>
-
-  <div class="notes">
-    <% @goal.notes.each do |note| %>
-      <div class="note">
-        <%= note.body %>
-        Added: <%= note.created_at %>
-        <%= link_to "Edit Note", edit_goal_note_path(@goal, note) %>
-        <%= link_to "Delete Note", goal_note_path(@goal, note), method: :delete %>
+<div class="cards">
+  <div class="card">
+    <div class="card-header">
+      <div class="title">
+        <h1><%= @goal.title %></h1>
       </div>
-    <% end %>
+      <div class="description">
+        <%= @goal.description %>
+      </div>
+    </div>
+    <div class="card-copy">
+
+    <% unless @goal.notes.empty? %>
+    <div class="card">
+    <div class="card-header">
+    <table class="tables">
+      <thead>
+        <tr>
+          <th>Note</th>
+          <th>Added</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @goal.notes.each do |note| %>
+        <tr>
+          <td>
+            <%= note.body %>
+          </td>
+          <td>
+            <%= note.created_at.to_formatted_s(:short) %>
+          </td>
+          <td>
+            <%= link_to "Edit Note", edit_goal_note_path(@goal, note) %> |
+            <%= link_to "Delete Note", goal_note_path(@goal, note), method: :delete %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
-  <%= link_to "Add Note", new_goal_note_path(@goal) %>
+    <% end %>
+  <div class="card-copy">
+    <%= link_to "Add Note", new_goal_note_path(@goal) %>
+  </div>
 </div>
 
-<% if @goal.children.empty? %>
-  <%= link_to 'What will it take to get to this goal?', new_goal_path(parent_id: @goal.id) %>
-<% else %>
-  <%= link_to 'What else will it take to get to this goal?', new_goal_path(parent_id: @goal.id) %>
-<% end %>
+    <%= link_to "Edit Goal", edit_goal_path(@goal) %> |
+    <%= link_to "Delete Goal", goal_path(@goal), method: :delete %>
 
-<%= link_to "Edit Goal", edit_goal_path(@goal) %>
-<%= link_to "Delete Goal", goal_path(@goal), method: :delete %>
+  </div>
+</div>
 
-<% @goal.walk_tree do |goal, level| %>
-  <%= link_to "#{'-'*level} #{goal.title}", goal_path(goal) %><br />
-<% end %>
+<div class="card">
+  <div class="card-header">
+    Goal Subview
+  </div>
+
+  <div class="card-copy">
+    <% @goal.walk_tree do |goal, level| %>
+      <%= link_to "#{'-'*level} #{goal.title}", goal_path(goal) %><br />
+    <% end %>
+
+    <% if @goal.children.empty? %>
+      <%= link_to 'What will it take to get to this goal?', new_goal_path(parent_id: @goal.id) %>
+    <% else %>
+      <%= link_to 'What else will it take to get to this goal?', new_goal_path(parent_id: @goal.id) %>
+    <% end %>
+  </div>
+</div>
+
+</div>

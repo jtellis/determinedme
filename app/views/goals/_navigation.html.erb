@@ -1,0 +1,6 @@
+<div class="navigation goals-navigation">
+<% unless @goal.root? %>
+<%= link_to "<- #{@goal.parent.title}", goal_path(@goal.parent) %> |
+<% end %>
+<%= link_to 'Overview', goal_overview_path(@goal.root) %>
+</div>

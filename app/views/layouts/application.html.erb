@@ -9,8 +9,15 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <div class="type-system-rounded">
+      <%= render partial: 'layouts/navigation' %>
+      <div class="wrapper">
+        <div class="main">
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+          <%= yield %>
+        </div>
+      </div>
+  </div>
   </body>
 </html>
