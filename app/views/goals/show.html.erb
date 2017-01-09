@@ -5,6 +5,13 @@
   <div class="description">
     <%= @goal.description %>
   </div>
+  <div class="subgoals">
+    <% @goal.children.each do |subgoal| %>
+      <div class="subgoal">
+        <%= subgoal.title %>
+      </div>
+    <% end %>
+  </div>
   <div class="notes">
     <% @goal.notes.each do |note| %>
       <div class="note">
@@ -21,3 +28,9 @@
     <%= f.submit "Create" %>
   <% end %>
 </div>
+<%= link_to 'What is it take to get to this goal?', new_goal_path(parent_id: @goal.id) %>
+<% if @goal.root? %>
+  <%= link_to 'Nothing, now I just have do it!', goal_path(@goal) %>
+<% else %>
+  <%= link_to 'Nothing, now I just have do it!', goal_path(@goal.parent) %>
+<% end %>

@@ -2,4 +2,4 @@
 <% @goals.each do |goal| %>
 <%= link_to goal, goal_path(goal) %>
 <% end %>
-<%= link_to 'Set a new determination!', new_goal_path %>
+<%= link_to 'Set a new determination!', new_goal_path(parent_id: 'root') %>
