@@ -34,3 +34,6 @@
 <% else %>
   <%= link_to 'Nothing, now I just have do it!', goal_path(@goal.parent) %>
 <% end %>
+<%= form_for @goal, url: goal_path(@goal), method: 'delete' do |f| %>
+  <%= f.submit "Delete" %>
+<% end %>

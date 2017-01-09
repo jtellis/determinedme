@@ -1,5 +1,5 @@
 class GoalsController < ApplicationController
-  before_action :set_goal, only: [:show]
+  before_action :set_goal, only: [:show, :destroy]
 
   def index
     @goals = current_user.goals.roots
@@ -12,6 +12,16 @@ class GoalsController < ApplicationController
   def create
     @goal = Goal.create!(goal_params)
     redirect_to @goal
+  end
+
+  def destroy
+    parent_goal = @goal.parent
+    @goal.destroy!
+    if parent_goal.nil?
+      redirect_to goals_path
+    else
+      redirect_to parent_goal
+    end
   end
 
   private
