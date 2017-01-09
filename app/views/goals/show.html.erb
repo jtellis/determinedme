@@ -32,8 +32,8 @@
             <%= note.created_at.to_formatted_s(:short) %>
           </td>
           <td>
-            <%= link_to "Edit Note", edit_goal_note_path(@goal, note) %> |
-            <%= link_to "Delete Note", goal_note_path(@goal, note), method: :delete %>
+            <%= link_to "Edit", edit_goal_note_path(@goal, note) %> |
+            <%= link_to "Delete", goal_note_path(@goal, note), method: :delete %>
           </td>
         </tr>
         <% end %>
