@@ -65,3 +65,5 @@ gem 'bourbon'
 gem 'neat'
 gem 'refills'
 gem 'scss-lint'
+
+ruby '2.3.2'
