@@ -1,8 +1,9 @@
-<%= form_for @goal, url: { action: 'create' } do |f| %>
+<%= form_for @goal do |f| %>
+  <%= f.error_messages %>
   <%= f.hidden_field :parent_id, { value: @goal.parent_id } %>
   <%= f.label :title %>
   <%= f.text_field :title %>
   <%= f.label :description %>
   <%= f.text_area :description, size: "60x12" %>
-  <%= f.submit "Create" %>
+  <%= f.submit %>
 <% end %>

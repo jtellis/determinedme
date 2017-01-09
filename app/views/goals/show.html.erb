@@ -16,24 +16,18 @@
     <% @goal.notes.each do |note| %>
       <div class="note">
         <%= note.body %>
-        Add: <%= note.created_at %>
-        <%= form_for note, url: goal_note_path(@goal, note), method: 'delete' do |f| %>
-          <%= f.submit "Delete" %>
-        <% end %>
+        Added: <%= note.created_at %>
+        <%= link_to "Edit Note", edit_goal_note_path(@goal, note) %>
+        <%= link_to "Delete Note", goal_note_path(@goal, note), method: :delete %>
       </div>
     <% end %>
   </div>
-  <%= form_for Note.new, url: goal_notes_path(@goal), method: 'post' do |f| %>
-    <%= f.text_area :body, size: "60x12" %>
-    <%= f.submit "Create" %>
-  <% end %>
+  <%= link_to "Add Note", new_goal_note_path(@goal) %>
 </div>
 <%= link_to 'What is it take to get to this goal?', new_goal_path(parent_id: @goal.id) %>
-<% if @goal.root? %>
-  <%= link_to 'Nothing, now I just have do it!', goal_path(@goal) %>
-<% else %>
+<% unless @goal.root %>
   <%= link_to 'Nothing, now I just have do it!', goal_path(@goal.parent) %>
 <% end %>
-<%= form_for @goal, url: goal_path(@goal), method: 'delete' do |f| %>
-  <%= f.submit "Delete" %>
-<% end %>
+
+<%= link_to "Edit Goal", edit_goal_path(@goal) %>
+<%= link_to "Delete Goal", goal_path(@goal), method: :delete %>
