@@ -13,8 +13,7 @@
     <div class="card-copy">
 
     <% unless @goal.notes.empty? %>
-    <div class="card">
-    <div class="card-header">
+    <div class="notes">
     <table class="tables">
       <thead>
         <tr>
@@ -42,9 +41,7 @@
     </table>
   </div>
     <% end %>
-  <div class="card-copy">
     <%= link_to "Add Note", new_goal_note_path(@goal) %>
-  </div>
 </div>
 
     <%= link_to "Edit Goal", edit_goal_path(@goal) %> |
