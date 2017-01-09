@@ -1,6 +1,10 @@
 class GoalsController < ApplicationController
   before_action :set_goal, only: [:show, :edit, :update, :destroy]
 
+  def overview
+    @goal = Goal.find(params[:goal_id])
+  end
+
   def index
     @goals = current_user.goals.roots
   end

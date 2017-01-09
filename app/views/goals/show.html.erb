@@ -1,3 +1,8 @@
+<% unless @goal.root? %>
+  <%= link_to "< #{@goal.parent.title}", goal_path(@goal.parent) %>
+<% end %>
+<%= link_to 'Overview', goal_overview_path(@goal.root) %>
+
 <div class="goal">
   <div class="title">
     <%= @goal.title %>
@@ -5,13 +10,7 @@
   <div class="description">
     <%= @goal.description %>
   </div>
-  <div class="subgoals">
-    <% @goal.children.each do |subgoal| %>
-      <div class="subgoal">
-        <%= subgoal.title %>
-      </div>
-    <% end %>
-  </div>
+
   <div class="notes">
     <% @goal.notes.each do |note| %>
       <div class="note">
@@ -24,10 +23,16 @@
   </div>
   <%= link_to "Add Note", new_goal_note_path(@goal) %>
 </div>
-<%= link_to 'What is it take to get to this goal?', new_goal_path(parent_id: @goal.id) %>
-<% unless @goal.root %>
-  <%= link_to 'Nothing, now I just have do it!', goal_path(@goal.parent) %>
+
+<% if @goal.children.empty? %>
+  <%= link_to 'What will it take to get to this goal?', new_goal_path(parent_id: @goal.id) %>
+<% else %>
+  <%= link_to 'What else will it take to get to this goal?', new_goal_path(parent_id: @goal.id) %>
 <% end %>
 
 <%= link_to "Edit Goal", edit_goal_path(@goal) %>
 <%= link_to "Delete Goal", goal_path(@goal), method: :delete %>
+
+<% @goal.walk_tree do |goal, level| %>
+  <%= link_to "#{'-'*level} #{goal.title}", goal_path(goal) %><br />
+<% end %>

@@ -1,5 +1,5 @@
-<h1>Goals</h1>
+<h1>My Determinations</h1>
 <% @goals.each do |goal| %>
-<%= link_to goal, goal_path(goal) %>
+<%= link_to goal, goal_overview_path(goal) %>
 <% end %>
 <%= link_to 'Set a new determination!', new_goal_path(parent_id: 'root') %>
